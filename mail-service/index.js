@@ -6,11 +6,12 @@ require('dotenv').config();
 
 const app = express();
 
-url = process.env.URL;
-
 // Enable CORS for frontend (adjust the origin as needed)
 app.use(cors({
-  origin: url,
+  origin: "https://demomail.kubez.cloud", // Allow requests only from your frontend
+  methods: "GET,POST,OPTIONS", // Specify allowed HTTP methods
+  allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
+  credentials: true, // If you need to send cookies or authentication headers
 }));
 
 // Middleware to parse JSON body
@@ -277,4 +278,4 @@ app.post("/verify-otp", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => console.warn(`Mail service running on port http://localhost:${PORT} \nBackend is running on ${url}`));
+app.listen(PORT, () => console.warn(`Mail service running on port http://localhost:${PORT} \nFrontend is running on https://demomail.kubez.cloud`));
